@@ -1,3 +1,7 @@
+[current_hosts]
 node1
 node2
 node3
+
+[current_hosts:vars]
+ansible_python_interpreter=/usr/bin/python3.12
