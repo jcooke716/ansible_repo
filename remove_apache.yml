@@ -1,0 +1,15 @@
+---
+
+- hosts: all
+  become: true
+  tasks: 
+
+  - name: Install the apache2 package
+    ansible.builtin.dnf: 
+      name: httpd
+      state: absent
+
+  - name: add php support for apache
+    dnf:
+      name: php-fpm
+      state: absent
