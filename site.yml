@@ -58,6 +58,7 @@
       owner: root
       group: root
       mode: 0644
+    register: httpd
 
   - name: Install apache and php for CentOS/RedHat servers
     tags: apache,apache2,ubuntu
@@ -67,6 +68,22 @@
        - php-ftp
       state: latest
     when: ansible_facts["os_family"] == "RedHat"
+
+  - name: Start httpd (CentOS)
+    tags: centos,httpd,apache
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+    when: ansible_facts["os_family"] == "RedHat"
+
+  - name: Restart httpd (centos)
+    tags: centos,apache,httpd
+    service:
+      name: httpd
+      state: restarted
+    when: httpd.changed
+
 
 - hosts: db_servers
   become: true
