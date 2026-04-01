@@ -1,8 +1,11 @@
-[current_hosts]
+[web_servers]
 node1
+
+
+[db_servers]
 node2
+
+[file_servers]
 node3
 
-[current_hosts:vars]
-ansible_python_interpreter=/usr/bin/python3.12
 
