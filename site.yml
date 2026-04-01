@@ -2,9 +2,10 @@
 
 - hosts: all
   become: true
-  tasks:
+  pre_tasks:
 
   - name: Install updates (centOS)
+    tags: always
     dnf:
       name: "*"
       state: latest
@@ -13,6 +14,7 @@
     when: ansible_facts["os_family"] == "RedHat"
  
   - name: Install updates Ubuntu
+    tags: always
     apt:
       update_only: yes
       upgrade: dist
@@ -23,6 +25,7 @@
   tasks:
 
   - name: Install apache and php for Ubuntu servers
+    tags: apache,apache2,ubuntu
     apt:
       name:
         - apache2
@@ -31,6 +34,7 @@
     when: ansible_facts["distribution"] == "Ubuntu"
 
   - name: Install apache and php for CentOS/RedHat servers
+    tags: apache,apache2,ubuntu
     dnf:
       name:
        - httpd
@@ -42,13 +46,15 @@
   become: true
   tasks:
 
-  - name: Istall mariadb package (RedHat)
+  - name: Install mariadb package (RedHat)
+    tags: db,mariadb,centos
     dnf: 
       name: mariadb
       state: latest
     when: ansible_facts["os_family"] == "RedHat"
 
   - name: Install mariadb package (Ubuntu)
+    tags: db,mariadb,ubuntu
     apt:
       name: mariadb-server
       state: latest
@@ -59,6 +65,7 @@
   tasks:
 
   - name: Install samba package
+    tags: samba
     package:
       name: samba
       state: latest
