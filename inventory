@@ -8,4 +8,5 @@ node2
 [file_servers]
 node3
 
-
+[workstations]
+jc-masternode
